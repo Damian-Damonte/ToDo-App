@@ -8,19 +8,19 @@ const body = this.document.querySelector("body");
 const todo = this.document.querySelectorAll("header, main, footer");
 const loader = this.document.querySelector(".spinner")
 
-todo.forEach(elemento=>{
-  elemento.classList.toggle("disabled")
-});
+// todo.forEach(elemento=>{
+//   elemento.classList.toggle("disabled")
+// });
 
-body.classList.toggle("bodyCentrado")
+// body.classList.toggle("bodyCentrado")
 
-this.setTimeout(function () {
-  loader.classList.toggle("disabled");
-  body.classList.toggle("bodyCentrado");
-  todo.forEach(elemento=>{
-    elemento.classList.toggle("disabled")
-  });
-},2000)
+// this.setTimeout(function () {
+//   loader.classList.toggle("disabled");
+//   body.classList.toggle("bodyCentrado");
+//   todo.forEach(elemento=>{
+//     elemento.classList.toggle("disabled")
+//   });
+// },2000)
 
 
 
@@ -37,6 +37,15 @@ window.addEventListener('load', function () {
   const nuevaTarea = this.document.getElementById("nuevaTarea");
 
 
+
+// boton hamburguesa
+
+const menuHamburguesa = this.document.getElementById("menu"),
+      btnHamburguesa = this.document.querySelector(".icono-menu");
+
+btnHamburguesa.addEventListener("click", ()=>{
+  menuHamburguesa.classList.toggle("active");
+})
 
 
 
