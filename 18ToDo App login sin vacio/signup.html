@@ -12,11 +12,13 @@
 
   <!-- ---------------- estilos compartidos de login y signup ---------------- -->
   <link rel="stylesheet" href="./css/loginSignupStyles.css">
+  <link rel="stylesheet" href="./css/loaders.css">
 
 
   <!-- ---------------------- logica aplicada en register -------------------- -->
   <script src="./scripts/utils.js"></script>
   <script src="./scripts/signup.js"></script>
+  <script src="./scripts/loaders.js"></script>
 
 </head>
 
@@ -50,7 +52,11 @@
       <label>Repetir contraseña</label>
       <input id="inputPasswordRepetida" type="password">
 
-      <button type="submit">Crear Cuenta</button>
+      <button type="submit">
+        <div class="spinner disabled"></div>
+        <span id="ingresar">Crear cuenta</span>
+      </button>
+      <div id="spinnerContainer"></div>
       <div id="divErrores">
         <ul id="listaErrores"></ul>
       </div>

@@ -7,7 +7,6 @@ body {
     background-size: cover;
     /* capa sobre fondo */
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .6);
-
 }
 
 header {
@@ -88,8 +87,16 @@ form button{
     border-radius: .3rem;
     font-size: 1rem;
     font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    position: relative;
 }
 form button:hover{
+    background-color: var(--azul-hover);
+}
+form button:disabled{
     background-color: var(--azul-hover);
 }
 
@@ -108,7 +115,7 @@ form button:hover{
 /*------------------------------- extra -------------------------------*/
 
 #divErrores {
-    margin-top: 20px;
+    margin-top: 0px;
 }
 #listaErrores{
     list-style: none;
@@ -117,4 +124,8 @@ form button:hover{
     font-size: 0.9rem;
     color: rgb(216, 7, 7);
     margin-top: 8px;
+}
+
+.disabled {
+    display: none;
 }

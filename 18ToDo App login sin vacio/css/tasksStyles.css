@@ -330,25 +330,26 @@ footer img {
         width: 30px;
         cursor: pointer;
     }
-
+    /* #F2F2F2 */
     .cont-menu {
-        background-color: rgb(6, 6, 117);
+        background-color: #F2F2F2;
         position: absolute;
         top: 3.5rem;
-        left: 50vw;
-        width: 50vw;
+        /* left: 50vw; */
+        width: 100vw;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        padding-top: 30px;
-        padding-bottom: 30px;
+        justify-content: space-between;
+        padding: 10px 10px 20px 10px;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         transition: all .5s ease;
+        border-left: .6rem solid grey
     }
 
     .cont-menu p{
         text-align: center;
+        color: black;
     }
 
     .cont-menu button {
@@ -358,7 +359,7 @@ footer img {
         border-radius: .3rem;
         font-size: .8rem;
         font-weight: 400;
-        margin-top: 20px;
+
     }
 
     .active {
@@ -381,15 +382,4 @@ footer img {
         margin: 10px 0 0 0;
         padding: .6rem 1.2rem;
     }
-
-    .descripcion{
-        display: flex;
-        flex-direction: column-reverse;
-    }
-
-    p.timestamp{
-        display: none;
-        color: red ;
-    }
-
 }

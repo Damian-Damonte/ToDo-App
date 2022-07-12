@@ -1,0 +1,73 @@
+.spinner {
+    border: 5px solid rgba(0, 225, 255, 0.274);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border-left-color: rgb(2, 255, 255);
+    animation: spin 1s ease infinite;
+    margin: auto;
+    position: absolute;
+
+}
+
+@keyframes spin {
+    0% {
+    transform: rotate(0deg);
+    }
+
+    100% {
+    transform: rotate(360deg);
+    }
+}
+
+
+
+ /* SKELETON */
+.skeleton-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+    
+.skeleton-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    border-radius: .5rem;
+    padding: .8em 1.6em;
+    box-shadow: 2px 2px 5px lightgrey;
+    animation: loadingContainerAnimation 2s linear infinite;
+}
+    
+.skeleton-text {
+    animation: loadingTextAnimation 2s linear infinite;
+    width: 40%;
+    max-width: 150px;
+    display: block;
+    padding: 0.7rem;
+}
+    
+@keyframes loadingContainerAnimation {
+    0% {
+    background: white;
+    }
+    50% {
+    background: rgb(182, 177, 177);
+    }
+    100% {
+    background: white;
+    }
+}
+    
+@keyframes loadingTextAnimation {
+    0% {
+    background: white;
+    }
+    50% {
+    background: rgb(128, 123, 123);
+    }
+    100% {
+    background: white;
+    }
+}

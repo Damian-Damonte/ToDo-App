@@ -13,7 +13,6 @@ window.addEventListener('load', function () {
     /* -------------------------------------------------------------------------- */
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-
         const usuario = {
             firstName: normalizarTexto(inputNombre.value),
             lastName: normalizarTexto(inputApellido.value),
@@ -28,10 +27,10 @@ window.addEventListener('load', function () {
     /* -------------------------------------------------------------------------- */
     /*                    FUNCIÓN 2: Realizar el signup [POST]                    */
     /* -------------------------------------------------------------------------- */
-    function realizarRegister(user) {
 
-        fetch(`${ENDPOINT}/users`, configuracionesPost(user))
-        .then( respuesta => respuesta.json())
-        .then( data => data.jwt ? loginExitiso(data) :  divErroes.innerHTML = loginErrores(data))
+    async function realizarRegister(user) {
+        mostrarSpinner();
+        const data = await superFetch(`${ENDPOINT}/users`, settingsFetch("POST", null, user))
+        data.jwt ? loginExitiso(data) : divErroes.innerHTML = loginErrores(data, inputEmail.value, inputPassword.value);
     };
 });
