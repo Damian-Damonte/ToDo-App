@@ -75,40 +75,24 @@ function renderizarErrores (){
     return contenedorErrores.map(error =>`<li class="errorItem">${error}</li>`).join("");
 };
 
-/* -------------------------------- configuraciones Fetch -------------------------------- */
+/* -------------------------------- settings Fetch -------------------------------- */
 function settingsFetch (metodo, jwt, payLoad) {
-
-    if (jwt === null && payLoad !== null){
-        return {
-            method: metodo,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payLoad)
-        };
+    const settings = {
+        method: metodo,
+        headers: {
+            authorization: jwt,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payLoad)
     };
-
     if (jwt !== null && payLoad === null) {
-        return {
-            method: metodo,
-            headers: {
-                authorization: jwt
-            },
-        };
+        delete settings.headers['Content-Type'];
+        delete settings.body;
+    } else if (jwt === null && payLoad !== null){
+        delete settings.headers.authorization;
     };
-
-    if (jwt !== null && payLoad !== null) {
-        return {
-            method: metodo,
-            headers: {
-                authorization: jwt,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payLoad)
-        };
-    };
+    return settings;
 };
-
 /* -------------------------------- super fetch -------------------------------- */
 
 async function superFetch (url, configuracion) {
@@ -121,11 +105,11 @@ async function superFetch (url, configuracion) {
 
 function renderizarPendientes (listado) {
     return listado.map(({id, description, createdAt}) => `  
-            <li class="tarea" data-aos="fade-down">
+            <li class="tarea" data-aos="fade-down" data-aos-offset="80">
                 <button class="change" data-idtarea="${id}"><i class="fa-regular fa-circle"></i></button>
                 <div class="descripcion">
                     <p class="nombre">${description}</p>
-                    <p class="timestamp">${new Date(createdAt).toLocaleString()}</p>
+                    <p class="timestamp">${dayjs(createdAt).format('DD/MM/YYYY - H:mm')}</p>
                 </div>
             </li>
         `).join("");
@@ -135,7 +119,7 @@ function renderizarPendientes (listado) {
 
 function renderizarTerminadas (listado) {
     return listado.map(({id, description})=>`
-        <li class="tarea" data-aos="fade-up">
+        <li class="tarea" data-aos="fade-down" data-aos-offset="60">
             <div class="hecha">
                 <i class="fa-regular fa-circle-check"></i>
             </div>
@@ -177,3 +161,31 @@ function contadorTareas (listadoTareasPendientes, listadoTareasTerminadas) {
     cantidadPendientes.textContent = listadoTareasPendientes.length;
     cantidadFinalizadas.textContent = listadoTareasTerminadas.length;
 };
+
+/* -------------------------------- close sesion alert -------------------------------- */
+async function closeSesion () {
+
+    Swal.fire({
+        title: 'Cerrar sesion',
+        text: "¿Está seguro que quiere cerrar sesion?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, cerrar',
+        cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+            title: 'Sesion cerrada',
+            icon: 'success',
+            showConfirmButton: false,
+            });
+            console.log(true);
+            return true;
+        } else {
+            console.log(false);
+            return false
+        }
+    })
+}

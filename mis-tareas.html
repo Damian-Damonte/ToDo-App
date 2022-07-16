@@ -12,6 +12,7 @@
   <!-- ----------------------------- estilos CSS ----------------------------- -->
   <link rel="stylesheet" href="./css/tasksStyles.css">
   <link rel="stylesheet" href="./css/loaders.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
 
   <!-- ------------------- libreria de iconos Fontawesome -------------------- -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -21,6 +22,9 @@
   <!-- logica de la página -->
   <script src="./scripts/utils.js"></script>
   <script src="./scripts/loaders.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
 
 </head>
@@ -61,7 +65,7 @@
   
       </ul>
   
-      <h2 id="h2Pendiente">Tareas finalizadas <span id="cantidad-finalizadas">0</span></h2>
+      <h2 id="h2Pendiente" >Tareas finalizadas <span id="cantidad-finalizadas">0</span></h2>
       <!-- contenedor vacío para las que pasen a terminadas -->
       <ul class="tareas-terminadas">
   

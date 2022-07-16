@@ -1,6 +1,6 @@
 const JWT = localStorage.getItem('jwt') || location.replace('/');
-renderizarSkeletons(3, ".tareas-pendientes")
-
+renderizarSkeletons(3, ".tareas-pendientes");
+AOS.init();
 /* ------ comienzan las funcionalidades una vez que carga el documento ------ */
 window.addEventListener('load', function () {
 
@@ -24,9 +24,33 @@ btnHamburguesa.addEventListener("click", ()=>{
   /* -------------------------------------------------------------------------- */
   /*                          FUNCIÓN 1 - Cerrar sesión                         */
   /* -------------------------------------------------------------------------- */
-  btnCerrarSesion.addEventListener('click', () => {
-    localStorage.clear();
-    location.replace('/');
+  btnCerrarSesion.addEventListener('click', async () => {
+    // Swal.fire({
+    //   title: 'Cerrar sesion',
+    //   text: "¿Está seguro que quiere cerrar sesion?",
+    //   icon: 'question',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Si, cerrar',
+    //   cancelButtonText: 'Cancelar'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     Swal.fire({
+    //     title: 'Sesion cerrada',
+    //     icon: 'success',
+    //     showConfirmButton: false,
+    //     });
+    //     setTimeout(function(){
+          // localStorage.clear();
+          // location.replace('/');
+    //       } ,1000)
+    //     }
+    //   })
+
+    if ( await closeSesion()){
+      console.log("cerrar");
+    }
   });
 
   /* -------------------------------------------------------------------------- */
@@ -62,6 +86,16 @@ btnHamburguesa.addEventListener("click", ()=>{
     await superFetch(`${ENDPOINT}/tasks`, settingsFetch("POST", JWT, payLoad));
     consultarTareas();
     this.reset();
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Tarea creada!',
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    })
   });
 
   /* -------------------------------------------------------------------------- */
@@ -100,7 +134,27 @@ btnHamburguesa.addEventListener("click", ()=>{
   /*                     FUNCIÓN 7 - Eliminar tarea [DELETE]                    */
   /* -------------------------------------------------------------------------- */
   async function botonBorrarTarea(nodo) {
-    await superFetch(`${ENDPOINT}/tasks/${nodo.dataset.idtarea}`, settingsFetch("DELETE", JWT, null));
-    consultarTareas();
+
+      Swal.fire({
+      title: 'Borrar tarea',
+      text: "¿Está seguro que quiere borrar la tarea?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+        title: 'Tarea borrada',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+        });
+        await superFetch(`${ENDPOINT}/tasks/${nodo.dataset.idtarea}`, settingsFetch("DELETE", JWT, null));
+        consultarTareas();
+        }
+      })
   };
 });
